@@ -6,10 +6,13 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.*;
 
+
 @Service
 public class LoginService {
     @Autowired
     LoginRepository loginRepository;
+
+    @Autowired private EmailService emailService;
 
     public Login newLogin(Login login) {
         Optional<Login> Login = loginRepository.findById(login.getEmail());
@@ -64,6 +67,9 @@ public class LoginService {
             Login l1 = login.get();
             l1.setOtp(rand.nextInt(max - min + 1) + min);
             loginRepository.save(l1);
+            EmailDetails details1 = new EmailDetails();
+            details1.setRecipient("rahath.marisetti@gmail.com");
+            details1.setMsgBody("This is your OTP:" + l1.getOtp() + "Please do not share with anyone."); // start from here in next class
             return "OTP generated successfully";
 
         } else {
@@ -72,4 +78,16 @@ public class LoginService {
 
 
     }
+    public boolean validateOTP(Login login){
+        String  l1  = login.getEmail();
+        int l2 = login.getOtp();
+        Optional<Login> login1 = loginRepository.findById(l1);
+        if(login1.isPresent() && login1.get().getOtp() == l2) {
+                return true;
+            }
+        return false;
+        }
+    }
+
+
 }
