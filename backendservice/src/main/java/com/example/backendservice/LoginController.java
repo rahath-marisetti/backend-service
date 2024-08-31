@@ -2,10 +2,15 @@ package com.example.backendservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+
 
 @RestController
 
 public class LoginController {
+
 
     @Autowired
     LoginService loginService;
@@ -28,5 +33,14 @@ public class LoginController {
     public String updateOTP (@RequestBody String email){
         return loginService.generateOTP(email);
     }
+    @PostMapping("/validateOTP")
+    public boolean validateOTP (@RequestBody Login login){
+        return loginService.validateOTP(login);
+    }
+
 
 }
+
+
+
+

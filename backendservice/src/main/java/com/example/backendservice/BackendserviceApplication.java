@@ -14,7 +14,6 @@ public class BackendserviceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendserviceApplication.class, args);
-		System.out.println("Push Test");
 	}
 
 }
