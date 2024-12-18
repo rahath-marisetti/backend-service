@@ -7,11 +7,11 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @GetMapping("/grantcode")
+  /*  @GetMapping("/grantcode")
     public String grantCode(@RequestParam("code") String code, @RequestParam("scope") String scope, @RequestParam("authuser") String authUser, @RequestParam("prompt") String prompt) {
         return processGrantCode(code);
     }
-
+*/
     @PostMapping("/newstudent")
     public Student createstudent(@RequestBody Student s) {
         return studentService.newStudent(s);
